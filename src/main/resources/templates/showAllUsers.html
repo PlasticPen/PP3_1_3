@@ -29,7 +29,7 @@
             <td th:text="${user.getName()}">name</td>
             <td th:text="${user.getSurname()}">surname</td>
             <td th:text="${user.getUsername()}">username</td>
-            <td th:text="${user.getRoles.size() == 2} ? 'ADMIN USER' : 'USER'" />
+            <td th:text="${user.getRoles.size() == 2} ? 'ADMIN USER' : 'USER'"/>
             <td>
                 <form th:method="GET" th:action="@{/admin/{id}/edit(id=${user.getId()})}">
                     <input type="submit" value="EDIT"/>
@@ -53,6 +53,10 @@
 <br/>
 <form th:action="@{/logout}">
     <input type="submit" value="LOGOUT"/>
+</form>
+<br/>
+<form th:action="@{/user}">
+    <input type="submit" value="User page"/>
 </form>
 </body>
 </html>

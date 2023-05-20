@@ -20,13 +20,14 @@ public class RegistrationController {
         this.userService = userService;
     }
 
+    //If default admin is deleted redirect to login page and creating admin user with credentials "admin" | "admin"
     @GetMapping
     public String initPage(@AuthenticationPrincipal User user) {
-        if (user == null) {
+
+        if (user == null || userService.findUserById(user.getId()).getId() == 0) {
             return "redirect:/createAdmin";
-        }
-        else if (userService.findUserById(user.getId()).getId() == 0) {
-            return "redirect:/login";
+        } else if (user.getRoles().size() == 2) {
+            return "redirect:/admin";
         }
         return "redirect:/user";
     }
@@ -44,7 +45,7 @@ public class RegistrationController {
 
     @PostMapping("/registration")
     public String addUser(@ModelAttribute("user") User userForm, Model model) {
-        if (!userService.saveUser(userForm)){
+        if (!userService.saveUser(userForm)) {
             model.addAttribute("usernameError", true);
             return "registration";
         }

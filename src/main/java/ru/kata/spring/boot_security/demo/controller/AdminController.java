@@ -36,7 +36,7 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    //If admin deletes itself, redirect to login page. Restarting server will create default admin user
+    //If admin deletes itself, redirect to login page
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") long id, @AuthenticationPrincipal User user) {
         userService.deleteUser(id);
